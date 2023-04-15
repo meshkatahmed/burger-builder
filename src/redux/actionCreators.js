@@ -42,5 +42,8 @@ export const orderLoadFailed = () => {
 
 export const fetchOrders = () => dispatch => {
     axios.get('https://react-burger-builder-f10e3-default-rtdb.firebaseio.com/orders.json')
-    .then(response=>dispatch(loadOrders(response.data)));
+    .then(response => dispatch(loadOrders(response.data)))
+    .catch(err => {
+        dispatch(orderLoadFailed());
+    });
 }
