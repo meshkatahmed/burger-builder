@@ -2,6 +2,14 @@ import React,{Component} from 'react';
 import {Formik} from 'formik';
 
 class AuthForm extends Component {
+    state = {
+        mode: 'signup'
+    }
+    switchModeHandler = () => {
+        this.setState({
+            mode: this.state.mode==='signup'?'login':'signup'
+        })
+    }
     render () {
         return (
             <div>
@@ -24,11 +32,12 @@ class AuthForm extends Component {
                             } else if (values.password.length<4) {
                                 errors.password = 'Must be at least 4 characters';
                             }
-
-                            if (!values.passwordConfirm) {
-                                errors.passwordConfirm = 'Required';
-                            } else if (values.password!==values.passwordConfirm) {
-                                errors.passwordConfirm = "Passwords don't match";
+                            if (this.state.mode==='signup') {
+                                if (!values.passwordConfirm) {
+                                    errors.passwordConfirm = 'Required';
+                                } else if (values.password!==values.passwordConfirm) {
+                                    errors.passwordConfirm = "Passwords don't match";
+                                }
                             }
                             // console.log('Errors:', errors);
                             return errors;
@@ -39,6 +48,17 @@ class AuthForm extends Component {
                                                                         padding: '15px',
                                                                         borderRadius: '5px'
                                                                     }}>
+                                <button style={{
+                                            width: '100%',
+                                            backgroundColor: '#D70F64',
+                                            color: 'white',
+                                        }} className='btn btn-lg' 
+                                        onClick={this.switchModeHandler}
+                                >
+                                    Switch to {this.state.mode==='signup'?'Login':'Signup'}
+                                </button>
+                                <br/>
+                                <br/>
                                 <form onSubmit={handleSubmit}>
                                     <input name='email' 
                                         placeholder='Enter Your Email'
@@ -55,18 +75,22 @@ class AuthForm extends Component {
                                         onChange={handleChange}
                                     />
                                     <span style={{color:'red'}}>{errors.password}</span>
-                                    <input name='passwordConfirm' 
-                                        placeholder='Confirm Password'
-                                        className='form-control'
-                                        value={values.passwordConfirm}
-                                        onChange={handleChange}
-                                    />
-                                    <span style={{color:'red'}}>{errors.passwordConfirm}</span>
                                     <br/>
+                                    {this.state.mode==='signup'?
+                                        <div>
+                                            <input name='passwordConfirm' 
+                                                placeholder='Confirm Password'
+                                                className='form-control'
+                                                value={values.passwordConfirm}
+                                                onChange={handleChange}
+                                            />
+                                            <span style={{color:'red'}}>{errors.passwordConfirm}</span>
+                                            <br/>
+                                        </div>:null}
                                     <button type='submit' 
                                             className='btn btn-success'
                                     >
-                                        Sign up
+                                        {this.state.mode==='signup'? 'Sign Up':'Login'}
                                     </button>
                                 </form>
                             </div>)
