@@ -1,5 +1,4 @@
 import React from "react";
-import Ingredient from "../Ingredients/ingredients";
 
 const Summary = props => {
     const ingredSummary = props.ingredients.map(item => {
