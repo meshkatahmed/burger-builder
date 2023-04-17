@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {Formik} from 'formik';
-import {auth} from '../../redux/authActionCreators'
+import {auth} from '../../redux/authActionCreatorsDjangoREST';
 import {connect} from 'react-redux';
 import Spinner from '../Spinner/spinner';
 import {Alert} from 'reactstrap';
