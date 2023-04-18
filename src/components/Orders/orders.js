@@ -16,13 +16,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchOrders: (token,userId) => dispatch(fetchOrders(token,userId)),
-        fetchOrdersDjangoREST: userId => dispatch(fetchOrdersDjangoREST(userId))
+        fetchOrdersDjangoREST: (token,userId) => dispatch(fetchOrdersDjangoREST(token,userId))
     }
 }
 class Orders extends Component {
     componentDidMount() {
         // this.props.fetchOrders(this.props.token,this.props.userId);
-        this.props.fetchOrdersDjangoREST(this.props.userId);
+        this.props.fetchOrdersDjangoREST(this.props.token,this.props.userId);
     }
     render() {
         let orders = null;

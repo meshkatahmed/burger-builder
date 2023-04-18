@@ -57,7 +57,8 @@ class Checkout extends Component {
         }
         const header = {
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${this.props.token}`
             }
         }
         axios.post('http://127.0.0.1:8000/api/order/',order,header)

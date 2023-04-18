@@ -56,11 +56,17 @@ export const fetchOrders = (token,userId) => dispatch => {
     });
 }
 
-export const fetchOrdersDjangoREST = userId => dispatch => {
-    axios.get(`http://127.0.0.1:8000/api/order/?id=${userId}`)
+export const fetchOrdersDjangoREST = (token,userId) => dispatch => {
+    const header = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    axios.get(`http://127.0.0.1:8000/api/order/?id=${userId}`) // #,header)
     .then(response => dispatch(loadOrdersDjangoREST(response.data)))
     .catch(err => {
         console.log(err);
         dispatch(orderLoadFailed());
     });
 }
+
