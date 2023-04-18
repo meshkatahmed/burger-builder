@@ -66,13 +66,20 @@ export const reducer = (state=INITIAL_STATE, action) => {
                 purchasable: false
             }
         case actionTypes.LOAD_ORDERS:
-            let orders = [];
+            var orders = [];
             for (let key in action.payload) {
                 orders.push({
                     ...action.payload[key],
                     id: key
                 })
             }
+            return {
+                ...state,
+                orders: orders,
+                ordersLoading: false
+            }
+        case actionTypes.LOAD_ORDERS_DJANGO_REST:
+            var orders = [...action.payload];
             return {
                 ...state,
                 orders: orders,

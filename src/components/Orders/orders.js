@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import {connect} from 'react-redux';
-import {fetchOrders} from '../../redux/actionCreators';
+import {fetchOrders,fetchOrdersDjangoREST} from '../../redux/actionCreators';
 import Order from "./Order/order";
 import Spinner from "../Spinner/spinner";
 
@@ -15,12 +15,14 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        fetchOrders: (token,userId) => dispatch(fetchOrders(token,userId))
+        fetchOrders: (token,userId) => dispatch(fetchOrders(token,userId)),
+        fetchOrdersDjangoREST: userId => dispatch(fetchOrdersDjangoREST(userId))
     }
 }
 class Orders extends Component {
     componentDidMount() {
-        this.props.fetchOrders(this.props.token,this.props.userId);
+        // this.props.fetchOrders(this.props.token,this.props.userId);
+        this.props.fetchOrdersDjangoREST(this.props.userId);
     }
     render() {
         let orders = null;

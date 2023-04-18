@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import Header from './Header/header.js';
 import BurgerBuilder from './BurgerBuilder/burgerBuilder.js';
 import Orders from './Orders/orders.js';
-import Checkout from './Orders/Checkout/checkout.js';
+import Checkout from './Orders/Checkout/checkoutDjangoREST.js';
 import AuthForm from './Auth/authForm';
 import {Route,Switch,Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
